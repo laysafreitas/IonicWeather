@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FiltroApiService } from '../Service/filtro-api.service';
+
 
 @Component({
   selector: 'app-tab2',
@@ -7,6 +9,15 @@ import { Component } from '@angular/core';
 })
 export class Tab2Page {
 
-  constructor() {}
+  cidadesFavoritas: any[] = [];
 
+  constructor(private filtroApi : FiltroApiService) {}
+  
+  ngOnInit() {
+    this.cidadesFavoritas = this.filtroApi.getCityFavo();
+  }
+  removerFavorito(cidade: any) {
+    this.filtroApi.removerFavoritos(cidade);
+    this.cidadesFavoritas = this.filtroApi.getCityFavo();
+  }
 }
